@@ -17,24 +17,36 @@ export const formSlice = createSlice({
       state.name = action.payload;
     },
 
+    changeTel: (state, action) => {
+      state.tel = action.payload;
+    },
 
-    // increment: (state) => {
-    //   // Redux Toolkit allows us to write "mutating" logic in reducers. It
-    //   // doesn't actually mutate the state because it uses the Immer library,
-    //   // which detects changes to a "draft state" and produces a brand new
-    //   // immutable state based off those changes
-    //   state.value += 1
-    // },
-    // decrement: (state) => {
-    //   state.value -= 1
-    // },
-    // incrementByAmount: (state, action) => {
-    //   state.value += action.payload
-    // },
+    changeEmail: (state, action) => {
+      state.email = action.payload;
+    },
+
+    changeLink: (state, action) => {
+      state.link = action.payload;
+    },
+
+    changeCity: (state, action) => {
+      state.city = action.payload;
+    },
+
+    changeStudio: (state, action) => {
+      state.studio = action.payload;
+    },
+
+    changeRecipient: (state, action) => {
+      state.recipient = action.payload;
+    },
+
+    changeSource: (state, action) => {
+      state.source = action.payload;
+    },
   },
 })
 
-// Action creators are generated for each case reducer function
-export const { changeName } = formSlice.actions
+export const { changeName, changeTel, changeEmail, changeLink, changeCity, changeStudio, changeRecipient, changeSource } = formSlice.actions
 
 export default formSlice.reducer

@@ -27,7 +27,7 @@ const StyledSelect = styled.select`
 
 const Select = ({ title, ...restProps }) => (
   <StyledSelect {...restProps}>
-    <option value="" disabled selected hidden>{title}</option>
+    <option value="" disabled defaultValue hidden>{title}</option>
     {restProps.children}
   </StyledSelect>
 );

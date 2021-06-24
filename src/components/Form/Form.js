@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeName } from './formSlice';
+import { changeName, changeTel, changeEmail, changeLink, changeCity, changeStudio, changeRecipient, changeSource } from './formSlice';
 import styled from 'styled-components';
 import Collapsible from 'react-collapsible';
 import Input from './components/Input';
@@ -66,15 +66,25 @@ const CollapsibleTitle = ({ arrowRotate = false, ...props }) => (
 const Form = () => {
   const [formHeight, setFormHeight] = useState('386px');
   const name = useSelector((state) => state.form.name);
+  const tel = useSelector((state) => state.form.tel);
+  const email = useSelector((state) => state.form.email);
+  const link = useSelector((state) => state.form.link);
+  const city = useSelector((state) => state.form.city);
+  const studio = useSelector((state) => state.form.studio);
+  const recipient = useSelector((state) => state.form.recipient);
+  const source = useSelector((state) => state.form.source);
   const dispatch = useDispatch();
 
   const SubmitHandle = () => {
-    console.log(name);
+    console.log(name, tel, email, link, city, studio, recipient, source);
+
+    return setTimeout(2000, () => console.log(name, tel, email, link, city, studio, recipient, source));
+    
   }
 
   return (
     <StyledForm id="request" style={{ height: formHeight }}
-      // onSubmit={}
+      onSubmit={SubmitHandle}
     >
       <FlexContainer>
         <Input type="text" 
@@ -95,6 +105,8 @@ const Form = () => {
           pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
           required
           maxLength="12"
+          value={tel}
+          onChange={e => dispatch(changeTel(e.target.value))}
         />
         <Input type="email" 
           name='email'
@@ -103,6 +115,8 @@ const Form = () => {
           form="request"
           required
           maxLength="20"
+          value={email}
+          onChange={e => dispatch(changeEmail(e.target.value))}
         />
         <Input type="text" 
           name='link'
@@ -111,10 +125,17 @@ const Form = () => {
           form="request"
           required
           maxLength="30"
+          value={link}
+          onChange={e => dispatch(changeLink(e.target.value))}
         />
-        <Select title="Выберите город *" name="city" required>
-          {cities.map(item => (
-            <option value={item.id}>{item.name}</option>
+        <Select title="Выберите город *" 
+          name="city" 
+          required
+          value={city}
+          onChange={e => dispatch(changeCity(e.target.currentTarget))}
+        >
+          {cities.map((item, ind) => (
+            <option value={item.id} key={ind}>{item.name}</option>
           ))}
         </Select>
         <Input type="text" 
@@ -124,6 +145,8 @@ const Form = () => {
           form="request"
           required
           maxLength="50"
+          value={studio}
+          onChange={e => dispatch(changeStudio(e.target.value))}
         />
         <Collapsible 
           trigger={<CollapsibleTitle>Показать дополнительные поля</CollapsibleTitle>}
@@ -138,13 +161,17 @@ const Form = () => {
               placeholder="ФИО"
               form="request"
               maxLength="50"
+              value={recipient}
+              onChange={e => dispatch(changeRecipient(e.target.value))}
             />
             <Select title="От куда узнали про нас?"
               name="source"
               form="request"
+              value={source}
+              onChange={e => dispatch(changeSource(e.target.currentTarget))}
             >
-              {sources.map(item => (
-                <option value={item}>{item}</option>
+              {sources.map((item, ind) => (
+                <option value={item} key={ind}>{item}</option>
               ))}
             </Select>
           </AnotherFlexContainer>
